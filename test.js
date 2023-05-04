@@ -5,3 +5,5 @@ const d = b + 0;
 const e = a + b;
 
 console.lg("sun is...", e);
+
+console.lg("abhijeeet");

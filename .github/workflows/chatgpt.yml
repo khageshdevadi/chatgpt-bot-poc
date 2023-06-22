@@ -15,7 +15,7 @@ jobs:
       - name: PR review by ChatGPT # Step name
         uses: sumit03guha/chatgpt-github-actions@v1.0 # Use the ChatGPT Github Actions from sumit03guha repository
         with:
-          openai_api_key: ${{ secrets.openai_api_key }} # Get the OpenAI API key from repository secrets
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }} # Get the OpenAI API key from repository secrets
           github_token: ${{ secrets.GITHUB_TOKEN }} # Get the Github Token from repository secrets
           github_pr_id: ${{ github.event.number }} # Get the Github Pull Request ID from the Github event
           openai_engine: 'gpt-3.5-turbo-16k' # Optional: specify the OpenAI engine to use. Default is "gpt-3.5-turbo-16k"

@@ -1,23 +1,23 @@
-name: Code Review
+on:
+  pull_request: # Trigger the workflow on pull request events
+    types: [opened, synchronize] # Run the workflow when pull request is opened or synchronized
 
 permissions:
   contents: read
   pull-requests: write
-
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+  statuses: write
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  hello_world_job: # Define the job
+    runs-on: ubuntu-latest # Specify the runner to run the job on
+    name: PR review by ChatGPT # Job name
     steps:
-      - uses: anc95/ChatGPT-CodeReview@main
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          # Optional
-          LANGUAGE: English
-          MODEL:
-          top_p: 1
-          temperature: 1
+      - name: PR review by ChatGPT # Step name
+        uses: sumit03guha/chatgpt-github-actions@v1.0 # Use the ChatGPT Github Actions from sumit03guha repository
+        with:
+          openai_api_key: ${{ secrets.openai_api_key }} # Get the OpenAI API key from repository secrets
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Get the Github Token from repository secrets
+          github_pr_id: ${{ github.event.number }} # Get the Github Pull Request ID from the Github event
+          openai_engine: 'gpt-3.5-turbo-16k' # Optional: specify the OpenAI engine to use. Default is "gpt-3.5-turbo-16k"
+          openai_temperature: 0.5 # Optional: specify the sampling temperature for OpenAI. Default is 0.5
+          openai_max_tokens: 16384 # Optional: specify the maximum number of tokens to generate in OpenAI completion. Default is 16384
